@@ -40,6 +40,7 @@ RUN \
   python3-invoke \
   rust-1.85 \
   rustfmt-1.85 \
+  ssh \
   sudo \
   # Generate en_US.UTF-8 locales
   && localedef \
