@@ -1,0 +1,43 @@
+// https://containers.dev/
+{
+  "name": "Advent of Code 2025 DevContainer",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "ARG_USER": "${localEnv:USER}"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      // VS code extensions
+      "extensions": [
+        "asciidoctor.asciidoctor-vscode",
+        "charliermarsh.ruff",
+        "dchanco.vsc-invoke",
+        "ms-azuretools.vscode-containers",
+        "ms-python.python",
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml"
+      ],
+      "settings": {
+        // Use bash as default shell
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/usr/bin/bash"
+          }
+        }
+      }
+    }
+  },
+  "mounts": [
+    // Make user settings available in container
+    "source=${localEnv:HOME}/.bashrc,target=${localEnv:HOME}/.bashrc,type=bind",
+    "source=${localEnv:HOME}/.gitconfig,target=${localEnv:HOME}/.gitconfig,type=bind",
+    "source=${localEnv:HOME}/.config,target=${localEnv:HOME}/.config,type=bind",
+    // Mount ssh keys
+    "source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,type=bind",
+    // Mount current workspace
+    "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind,consistency=cached"
+  ]
+}

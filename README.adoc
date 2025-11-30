@@ -1,0 +1,7 @@
+= README
+
+:url-aoc25: https://adventofcode.com/2025[Advent of Code 2025]
+
+This repository contains my solutions for the Advent of Code 2025 programming challenges.
+
+Calendar: link:{url-aoc25}
