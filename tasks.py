@@ -1,9 +1,9 @@
 from invoke import context, task
 import os
 
-RUST_GDB = "rust-1.85-gdb"
-RUST_FMT = "rust-1.85"
-CARGO_BIN = "cargo-1.85"
+RUST_GDB = "rust-gdb"
+RUST_FMT = "rust"
+CARGO_BIN = "cargo"
 
 BIN_DIR = "bin"
 

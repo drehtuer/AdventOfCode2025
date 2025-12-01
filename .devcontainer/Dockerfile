@@ -31,6 +31,8 @@ RUN \
   bash \
   bash-completion \
   ca-certificates \
+  curl \
+  gcc \
   git \
   locales \
   luarocks \
@@ -38,8 +40,6 @@ RUN \
   python-is-python3 \
   python3 \
   python3-invoke \
-  rust-1.85 \
-  rustfmt-1.85 \
   ssh \
   sudo \
   # Generate en_US.UTF-8 locales
@@ -54,12 +54,30 @@ RUN \
   && useradd \
   --create-home \
   --user-group \
+  --groups \
+  sudo \
   --shell /usr/bin/bash \
   ${ARG_USER} \
   && inv \
   --print-completion-script=bash \
   > /etc/bash_completion.d/invoke
 
+COPY \
+  --chown=root:root \
+  --chmod=0700 \
+  sudo.conf /etc/sudoers.d/sudoers
+
 USER ${ARG_USER}
+
+RUN \
+  # Install rust
+  curl \
+  --proto '=https' \
+  --tlsv1.2 \
+  -sSf \
+  https://sh.rustup.rs \
+  | sh -s -- \
+  -y \
+  --default-toolchain stable
 
 CMD {"sleep", "infinity"}
