@@ -1,8 +1,6 @@
 use utils;
 
 const INPUT_PATH: &str = "day1/resources/input.txt";
-const DIAL_MAX: i32 = 99;
-const DIAL_MIN: i32 = 0;
 const DIAL_INIT: i32 = 50;
 
 fn parse_input(path: &str) -> Vec<String> {
@@ -24,6 +22,9 @@ fn apply_command(dial: &mut i32, command: (char, u32)) {
         _ => {},
         };
     *dial = *dial % 100;
+    if *dial < 0 {
+        *dial += 100;
+    }
 }
 
 fn main() {
