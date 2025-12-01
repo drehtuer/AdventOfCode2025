@@ -5,10 +5,7 @@ RUST_GDB = "rust-1.85-gdb"
 RUST_FMT = "rust-1.85"
 CARGO_BIN = "cargo-1.85"
 
-SRC_DIR = "src"
-MAIN_RS = "main.rs"
 BIN_DIR = "bin"
-BIN_FILE = "advent_of_code_2025"
 
 CARGO_FLAGS = [
     "--color always",
@@ -42,10 +39,22 @@ def clean(ctx: context) -> None:
 
 
 @task
-def run_debug(ctx: context) -> None:
-    ctx_run(ctx, [os.path.join(BIN_DIR, "debug", BIN_FILE)])
+def run_debug(ctx: context, day: int) -> None:
+    ctx_run(ctx, [os.path.join(BIN_DIR, "debug", f"aoc_25_day{day}")])
 
 
 @task
-def run_release(ctx: context) -> None:
-    ctx_run(ctx, [os.path.join(BIN_DIR, "release", BIN_FILE)])
+def run_release(ctx: context, day: int) -> None:
+    ctx_run(ctx, [os.path.join(BIN_DIR, "release", f"aoc_25_day{day}")])
+
+
+@task
+def debug(ctx: context, day: int) -> None:
+    build_debug(ctx)
+    run_debug(ctx, day)
+
+
+@task
+def release(ctx: context, day: int) -> None:
+    build_release(ctx)
+    run_release(ctx, day)
