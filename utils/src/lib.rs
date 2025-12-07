@@ -59,4 +59,8 @@ impl<T: Clone> Matrix<T> {
         }
         Some(&mut self.data[row * self.cols + col])
     }
+
+    pub fn data(&self) -> &Vec<T> {
+        &self.data
+    }
 }
